@@ -10,21 +10,34 @@
 		<script src="js/angular.min.js"></script>
 		<script src="js/bbog.js" type="text/javascript"></script>
 	</head>
-	<body ng-app="tweetFeed">
-		<div ng-controller="tweetController as tCtrl">
+	<body ng-app="tweetFeed" ng-controller="tweetController as tCtrl">
+		<div>
 			<h1>Bring Back Our Girls Dammit! :'(</h1>
 		</div>
-
-		<div class="overlay">
+		<div ng-class="{overlay: tCtrl.isSelected}" ng-show="tCtrl.isSelected" ng-click="tCtrl.unselectInsta()">
 			<div id="insta_selected">
+				<div>
+                	<div class="thumbnail thumbnail_overlay" >
+                        <img ng-src="{{tCtrl.selected.images.standard_resolution.url}}" height="400" width="400">
+                        <div class="caption">
+                            <p>{{tCtrl.selected.caption.text}}</p>
+                        </div>
+                    </div>
+                </div>
 			</div>
 		</div>
 
 		<div class="row">
 			<div id="insta_results" class="col-md-12 well">
+				<div class="col-md-2" ng-repeat="insta in tCtrl.results">
+                    <div class="thumbnail">
+                        <img ng-src="{{insta.images.thumbnail.url}}" alt="..." ng-click="tCtrl.selectInsta(insta)">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button id="more_btn" class="thumbnail btn btn-danger" style="height:160px; width:180px; background-color:transparent;" ng-click="tCtrl.moreInstas()">More Images</button>
+                </div>
 			</div>
-			<!-- <div id="insta_selected" class="col-md-6 well">
-			</div> -->
 
 		</div>
 
